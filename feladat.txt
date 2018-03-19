@@ -1,0 +1,54 @@
+„A Műhely támogatásokból működik, és szeretnénk hamar tudni, ha érkezett támogatás részünkre. Kérjük, hogy készíts egy olyan programot, amely paraméterekben (BTC, ETH, LTC, DASH) megadott BTC, ETH, LTC, DASH addressek esetében paraméterben (perc) megadott perc elteltével ellenőrzi, hogy kaptunk-e támogatást az előző ellenőrzés óta, és ha igen, akkor email-t küld róla paraméterben megadott email címekre (mail).
+
+A paraméterek az átküldött kódban az alábbiakra állítsátok be:
+address-ek: a weboldalukon feltüntetett megfelelő címek
+perc: 5 perc
+mail: vilmos@blokklancmuhely.club
+
+Kérjük, hogy mindenki egyénileg dolgozzon, és esetlegesen felmerült kérdéseiteket is csak a jelentkezes@blokklancmuhely. club címre küldjétek, egymásnak ne CC-zétek, BCC-zétek, fowardoljátok stb. Egyéni munka, versenyhelyzet.
+
+Elbírálási szempontok fontosság szerint csökkenő sorrendben:
+3/1 profizmus (a megvalósítás minősége)
+3/2 rövid idő alatt történő leszállítás
+3/3 kód újrahasznosíthatósága.
+
+A levél tárgya tartalmazza: „Tamogatas erkezett ” és hogy miben érkezett a támogatás.
+A levél szövege tartalmazza külön sorokban: mennyiség; currency code; időpont, to address, from address, number of confirmations
+A támogatást már 1 confirmation esetén megérkezettnek tekintjük.
+A paraméterben megadott email címre ne érkezzen email, más email címmel teszteljétek a munkátokat.
+
+Fontos, hogy a kódot Ti magatok írjátok, ne más által készített kódot küldjetek.
+
+Bármilyen programnyelven készíthetitek, viszont elvárás, hogy a fent leírt funkcionalitás valósuljon meg.”
+
+Ne aggódjatok, lesz nehezebb feladat is. 😊
+
+Köszönjük! Jó munkát kívánunk!
+
+
+Üdvözlettel:
+Timi & Vilmos & Anti
+
+u.i.: A Műhely jelenlegi tagjainak és jelentkezőinek is vissza kell küldeni a feladatot megoldó kódot Vilmosnak (címe CC-ben) és nekem.
+
+--
+
+Borbás Antal Mózes
+
+alapító
+
+Blokklánc Műhely
+
+https://blokklancmuhely.club/
+
+
+
+
+
+Ha megteheted, akkor kérünk, hogy támogass minket:
+
+BTC: 12QpKTP3KnHg7ZqEAEyJTq6pGX7xjWTvGG
+ETH: 0x0197F32CdccE55A8c34a2c000AdD1adFdAf97f14
+LTC: LPUN3AdkQ1hxTX6GLpnYgzb1kQUdB5mMPV
+DASH: XiWcB2u7PH4q4Xt1KcsLheqoG43TYX1my8
+IOP: pSE2C4HfZP8fAHtk1d93nd2sDqWkDfxYQu 
