@@ -1,4 +1,5 @@
 import btc_checker
+import eth_checker
 import payment
 
 import requests
@@ -11,16 +12,23 @@ print('cur time', cur_time)
 time0 = 1514000000
 
 # BLMűh
-address = '12QpKTP3KnHg7ZqEAEyJTq6pGX7xjWTvGG'
-btc_checker.checkBTC(address, time0, cur_time)
+#btc_address = '12QpKTP3KnHg7ZqEAEyJTq6pGX7xjWTvGG'
+#btc_checker.BTCCheck(btc_address, time0, cur_time)
 
 # test1
-address = '19M3CezEbdiv9EZKryi89is5KcM3QzStkL'  # test1 1521148506 1520130638 1514346984
-btc_checker.checkBTC(address, time0, cur_time)
-#CheckAddress(address, time0, 1514346990, cur_block_height)
-#CheckAddress(address, 1514346990, 1520130650, cur_block_height)
-#CheckAddress(address, 1520130650, cur_time, cur_block_height)
+#btc_address = '19M3CezEbdiv9EZKryi89is5KcM3QzStkL'  # test1 1521148506 1520130638 1514346984
+#btc_checker.BTCCheck(btc_address, time0, cur_time)
+#CheckAddress(btc_address, time0, 1514346990, cur_block_height)
+#CheckAddress(btc_address, 1514346990, 1520130650, cur_block_height)
+#CheckAddress(btc_address, 1520130650, cur_time, cur_block_height)
 
 # test2
-#address = '39du52dRqNHCcErFuoFCqhHQs2fczQUqBL'
-#CheckAddress(address, time0, cur_time, cur_block_height)
+#btc_address = '39du52dRqNHCcErFuoFCqhHQs2fczQUqBL'
+#CheckAddress(btc_address, time0, cur_time, cur_block_height)
+
+# test1
+eth_address = '0x84b14bdfa2eb6b03c78e36b528675396ef40de0a'  
+# BLMuh
+#eth_address = '0x0197F32CdccE55A8c34a2c000AdD1adFdAf97f14'
+
+eth_checker.ETHCheck(eth_address)
