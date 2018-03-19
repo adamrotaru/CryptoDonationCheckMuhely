@@ -5,7 +5,7 @@ import json
 
 # Checks incoming BTC transactions to a given address, within a time range
 # Returns an array of Payments
-def checkBTC(address, time_from, time_to):
+def BTCCheck(address, time_from, time_to):
     cur_block_height = __getBlockHeight()
     print("Check BTC", address, time_from, time_to, cur_block_height)
     url = 'https://blockchain.info/en/rawaddr/' + address
