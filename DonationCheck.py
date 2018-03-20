@@ -1,6 +1,7 @@
 import btc_checker
 import eth_checker
 import payment
+import mailer
 
 import requests
 import json
@@ -31,4 +32,7 @@ eth_address = '0x84b14bdfa2eb6b03c78e36b528675396ef40de0a'
 # BLMuh
 #eth_address = '0x0197F32CdccE55A8c34a2c000AdD1adFdAf97f14'
 
-eth_checker.ETHCheck(eth_address)
+payments = eth_checker.ETHCheck(eth_address)
+
+mailer.send_payments(payments)
+
