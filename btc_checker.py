@@ -1,4 +1,5 @@
 import payment
+import payment_result
 
 import requests
 import json
@@ -27,7 +28,7 @@ def BTCCheck(address, time_from, time_to):
         p = __checkTransaction(tx, address, time_from, time_to, cur_block_height)
         if p is not None:
             payments.append(p)
-    return payments
+    return payment_result.PaymentResult(time_from, time_to, payments)
 
 def __checkTransaction(tx, address, time_from, time_to, cur_block_height):
     #print(tx)
