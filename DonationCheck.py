@@ -11,7 +11,7 @@ import time
 import datetime
 
 
-def DonationCheck(time_from, time_to):
+def DonationCheckTime(time_from, time_to):
     print("Checking payments, time range", datetime.datetime.fromtimestamp(time_from).__str__(), datetime.datetime.fromtimestamp(time_to).__str__())
     payments = []
     btc_address = config.get()["btc_address"]
@@ -28,13 +28,19 @@ def DonationCheck(time_from, time_to):
     return paymentRes
     
 
-config.get()
-
-# current UTC time
-cur_time = int(time.time()) + time.timezone
-#print('cur time', cur_time)
-time0 = 1514000000
-
+def DonationCheck():
+    state = config.get_state()
+    lastcheck = int(state["lastcheck"])
+    # current UTC time
+    cur_time = int(time.time()) + time.timezone
+    paymentRes = DonationCheckTime(lastcheck, cur_time)
+    try:
+        state["lastcheck"] = cur_time
+        config.save_state(state)
+    except:
+        pass
+    return paymentRes
+    
 # test1
 #btc_address = '19M3CezEbdiv9EZKryi89is5KcM3QzStkL'  # test1 1521148506 1520130638 1514346984
 #paymentRes = btc_checker.BTCCheck(btc_address, time0, cur_time)
@@ -45,9 +51,15 @@ time0 = 1514000000
 #btc_address = '39du52dRqNHCcErFuoFCqhHQs2fczQUqBL'
 #CheckAddress(btc_address, time0, cur_time, cur_block_height)
 
-paymentRes = DonationCheck(time0, cur_time)
+
+config.get()
+config.get_state()
+
+paymentRes = DonationCheck()
+
 paymentRes.print()
 if (paymentRes.count() > 0):
     mailer.send_payments(paymentRes)
 else:
     print("No new payments to send")
+
