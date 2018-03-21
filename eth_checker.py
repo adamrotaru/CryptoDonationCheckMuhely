@@ -1,12 +1,11 @@
 import payment
 import payment_result
-
+import config
 import requests
 
-# etherscan API key
-apiKeyToken = 'C5I42D9TYVZZGVQZKY6KU8TEUBY912STGF' 
 
 def ETHCheck(address, time_from, time_to):
+    apiKeyToken = config.get()["etherscan_apiKeyToken"]
     # address balance
     #url = 'https://api.etherscan.io/api?module=account&action=balance&address=' + address + '&tag=latest&apikey=' + apiKeyToken
     # transactions
@@ -19,18 +18,19 @@ def ETHCheck(address, time_from, time_to):
     data = resp.json()
     #print(data)
     #print(data['status'])
-    if resp.status_code != 200 or data is None or data['status'] != '1':
-        print("Error", resp.status_code)
-        print(data['status'])
-        print(data['message'])
-        return None
-    #print(data['result'])
     payments = []
+    if resp.status_code != 200 or data is None or data['status'] != '1':
+        print("Error retrieving transactions or no transactions", resp.status_code)
+        print(data)
+        #print(data['status'])
+        #print(data['message'])
+        return payments
+    #print(data['result'])
     for tx in data['result']:
         p = __checkTransaction(tx, address, time_from, time_to)
         if p is not None:
             payments.append(p)
-    return payment_result.PaymentResult(time_from, time_to, payments)
+    return payments
 
 def __checkTransaction(tx, address, time_from, time_to):
     #print(tx)

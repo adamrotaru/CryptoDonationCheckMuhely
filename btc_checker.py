@@ -13,22 +13,22 @@ def BTCCheck(address, time_from, time_to):
     response = requests.get(url)
     #print(response)
     #print(response.status_code)
-    if (response.status_code != 200):
-        print("Error", response.status_code, response.content)
-        return null
+    payments = []
+    if response.status_code != 200:
+        print("Error", response.status_code, "cont", response.content)
+        return payments
     #print(response.content)
     #data = json.load(response.content)
     data = response.json()
     #print data
     #print("final balance:", data['final_balance'])
-    payments = []
     spent_sum = 0
     recd_sum = 0
     for tx in data['txs']:   #reversed(data['txs']):
         p = __checkTransaction(tx, address, time_from, time_to, cur_block_height)
         if p is not None:
             payments.append(p)
-    return payment_result.PaymentResult(time_from, time_to, payments)
+    return payments
 
 def __checkTransaction(tx, address, time_from, time_to, cur_block_height):
     #print(tx)

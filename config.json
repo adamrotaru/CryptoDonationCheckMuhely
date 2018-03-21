@@ -1,0 +1,13 @@
+{
+    "btc_address": "12QpKTP3KnHg7ZqEAEyJTq6pGX7xjWTvGG",
+    "eth_address": "0x0197F32CdccE55A8c34a2c000AdD1adFdAf97f14",
+
+    "to_addr": "ENTER_DESTINATION_EMAIL_HERE",
+    "from_addr": "DonationCheck@blokklancmuhely.club",
+
+    "etherscan_apiKeyToken": "C5I42D9TYVZZGVQZKY6KU8TEUBY912STGF",
+    "smtp_server": "smtp.mailgun.org",
+    "smtp_port": 587,
+    "smtp_user": "",
+    "smtp_pass": ""
+}

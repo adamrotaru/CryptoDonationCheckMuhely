@@ -3,6 +3,9 @@ Check incoming cryptocurrency transfers to Donate To addresses, for Blockchain A
 
 Blokklánc Műhely   https://blokklancmuhely.club/
 
+# Usage and Configuration
+TODO
+
 # Approaches
 1. Run (full) nodes locally, and interface with them.
 1.a. Interface through APIs of the nodes, if available
@@ -16,5 +19,3 @@ Blokklánc Műhely   https://blokklancmuhely.club/
 
 I have chosen 3. for simplicity and fast prototyping
 
-# Configuration
-TODO

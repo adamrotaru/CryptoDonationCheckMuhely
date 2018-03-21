@@ -1,15 +1,11 @@
+import config
+
 import requests
 import smtplib
 from email.mime.text import MIMEText
 
-mailgun_domain = "sandbox71d6b0cfbdc24509a7e8ec91c3fdcb03.mailgun.org"
-mailgun_apikey = ""
-to_addr = "adam_rotaru@yahoo.com"
-from_addr = "DonationCheck@blokklancmuhely.club"
-smtp_server = "smtp.mailgun.org"
-smtp_port = 587
-smtp_user = "postmaster@sandbox71d6b0cfbdc24509a7e8ec91c3fdcb03.mailgun.org"
-smtp_pass = ""
+#mailgun_domain = "sandbox71d6b0cfbdc24509a7e8ec91c3fdcb03.mailgun.org"
+#mailgun_apikey = ""
 
 def send_payments(paymentRes):
     subject = str(paymentRes.count())  + " new payments"
@@ -17,7 +13,12 @@ def send_payments(paymentRes):
     for p in paymentRes.payments:
         body = body + "- " + p.to_string() + "\n"
     #send_mail_mailgun_api(to_addr, subject, body, mailgun_domain, mailgun_apikey)
-    send_mail_smpt(to_addr, from_addr, subject, body, smtp_server, smtp_port, smtp_user, smtp_pass)
+    cfg = config.get()
+    to_addr = cfg["to_addr"]
+    send_mail_smpt(
+        to_addr, cfg["from_addr"], 
+        subject, body, 
+        cfg["smtp_server"], cfg["smtp_port"], cfg["smtp_user"], cfg["smtp_pass"])
     print("mail sent to", to_addr, "payments:", paymentRes.count())
 
 def send_mail_mailgun_api(to_addr, subject, body, mailgun_domain, mailgun_apikey):
@@ -40,6 +41,7 @@ def send_mail_smpt(to_addr, sender_addr, subject, body, server, port, user, pass
     # Send the message via our own SMTP server, but don't include the
     # envelope header.
     s = smtplib.SMTP(server, port)
-    s.login(user, password)
+    if user != None and len(user) > 0:
+        s.login(user, password)
     s.sendmail(sender_addr, [to_addr], msg.as_string())
     s.quit()
