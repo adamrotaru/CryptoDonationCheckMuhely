@@ -12,10 +12,10 @@ The config.json file has to set up with a few parameters:
 - btc_address: The BTC address to watch (can be empty).  Pre-populated.
 - eth_address: The ETH address to watch (can be empty).  Pre-populated.
 - checkPeriodMins: the numberof minutes to wait between checks.
-- to_addr: The email address to send mails to
+- to_addr: The email address to send mails to.  Must be set!
 - from_addr:  The sender email address, pre-populated.
 - etherscan_apiKeyToken: API token for etherscan service (must register).  Pre-populated.
-- smtp_server: SMTP server to use for sending.
+- smtp_server: SMTP server to use for sending.  Must be set!
 - smtp_port: Port used for SMTP sending.
 - smtp_user: Optional username for SMTP server.
 - smtp_pass: Optional password for SMTP server.
