@@ -4,14 +4,35 @@ import payment
 import payment_result
 import mailer
 import config
+
 import requests
 import json
 import time
+import datetime
 
 
-#print('cur time', time.timezone)
-cur_time = int(time.time()) + 600
-print('cur time', cur_time)
+def DonationCheck(time_from, time_to):
+    print("Checking payments, time range", datetime.datetime.fromtimestamp(time_from).__str__(), datetime.datetime.fromtimestamp(time_to).__str__())
+    payments = []
+    btc_address = config.get()["btc_address"]
+    if len(btc_address) > 0:
+        btc_p = btc_checker.BTCCheck(btc_address, time_from, time_to)
+        payments.extend(btc_p)
+
+    eth_address = config.get()["eth_address"]
+    if len(eth_address) > 0:
+        eth_p = eth_checker.ETHCheck(eth_address, time_from, time_to)
+        payments.extend(eth_p)
+
+    paymentRes = payment_result.PaymentResult(time_from, time_to, payments)
+    return paymentRes
+    
+
+config.get()
+
+# current UTC time
+cur_time = int(time.time()) + time.timezone
+#print('cur time', cur_time)
 time0 = 1514000000
 
 # test1
@@ -24,18 +45,7 @@ time0 = 1514000000
 #btc_address = '39du52dRqNHCcErFuoFCqhHQs2fczQUqBL'
 #CheckAddress(btc_address, time0, cur_time, cur_block_height)
 
-payments = []
-btc_address = config.get()["btc_address"]
-if len(btc_address) > 0:
-    btc_p = btc_checker.BTCCheck(btc_address, time0, cur_time)
-    payments.extend(btc_p)
-
-eth_address = config.get()["eth_address"]
-if len(eth_address) > 0:
-    eth_p = eth_checker.ETHCheck(eth_address, time0, cur_time)
-    payments.extend(eth_p)
-
-paymentRes = payment_result.PaymentResult(time0, cur_time, payments)
+paymentRes = DonationCheck(time0, cur_time)
 paymentRes.print()
 if (paymentRes.count() > 0):
     mailer.send_payments(paymentRes)

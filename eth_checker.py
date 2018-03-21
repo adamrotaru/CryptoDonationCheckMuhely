@@ -1,10 +1,12 @@
 import payment
 import payment_result
 import config
-import requests
 
+import requests
+import datetime
 
 def ETHCheck(address, time_from, time_to):
+    print("Checking ETH", address, "time range", time_from, time_to)
     apiKeyToken = config.get()["etherscan_apiKeyToken"]
     # address balance
     #url = 'https://api.etherscan.io/api?module=account&action=balance&address=' + address + '&tag=latest&apikey=' + apiKeyToken
@@ -30,6 +32,8 @@ def ETHCheck(address, time_from, time_to):
         p = __checkTransaction(tx, address, time_from, time_to)
         if p is not None:
             payments.append(p)
+    if len(payments) > 0:
+        print("Found", len(payments), "payments")
     return payments
 
 def __checkTransaction(tx, address, time_from, time_to):

@@ -8,13 +8,23 @@ from email.mime.text import MIMEText
 #mailgun_apikey = ""
 
 def send_payments(paymentRes):
-    subject = str(paymentRes.count())  + " new payments"
-    body = "There are " + str(paymentRes.count())  + " new payments" + "\n"
+    if paymentRes.count() == 0:
+        subject = "No new payments :("
+        body = "There are no new payments" + "\n"
+    else:
+        if paymentRes.count() == 1:
+            subject = "New payment"
+            body = "There is one new payment:" + "\n"
+        else:
+            subject = "New payments"
+            body = "There are " + str(paymentRes.count())+ " new payments:" + "\n"
     for p in paymentRes.payments:
         body = body + "- " + p.to_string() + "\n"
-    #send_mail_mailgun_api(to_addr, subject, body, mailgun_domain, mailgun_apikey)
+    body = body + "\n" + "Check included period: " + datetime.datetime.fromtimestamp(self.time_from).__str__() + " - " + datetime.datetime.fromtimestamp(self.time_to).__str__() +  + "\n"
+
     cfg = config.get()
     to_addr = cfg["to_addr"]
+    #send_mail_mailgun_api(to_addr, subject, body, mailgun_domain, mailgun_apikey)
     send_mail_smpt(
         to_addr, cfg["from_addr"], 
         subject, body, 
