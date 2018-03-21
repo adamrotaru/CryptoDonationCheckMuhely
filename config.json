@@ -2,7 +2,7 @@
     "btc_address": "12QpKTP3KnHg7ZqEAEyJTq6pGX7xjWTvGG",
     "eth_address": "0x0197F32CdccE55A8c34a2c000AdD1adFdAf97f14",
 
-    "checkPeriodMins": "5",
+    "checkPeriodMins": "5.0",
     "to_addr": "ENTER_DESTINATION_EMAIL_HERE",
     "from_addr": "DonationCheck@blokklancmuhely.club",
 
