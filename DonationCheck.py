@@ -28,7 +28,7 @@ def DonationCheckTime(time_from, time_to):
     return paymentRes
     
 
-def DonationCheck():
+def DonationCheckAndMail():
     state = config.get_state()
     lastcheck = int(state["lastcheck"])
     # current UTC time
@@ -39,8 +39,30 @@ def DonationCheck():
         config.save_state(state)
     except:
         pass
-    return paymentRes
+    paymentRes.print()
+    if (paymentRes.count() > 0):
+        mailer.send_payments(paymentRes)
+    else:
+        print("No new payments to send")
     
+def DonationCheckLoop():
+    periodMin = float(config.get()["checkPeriodMins"])
+    periodSec = int(periodMin * 60)
+    while True:
+        DonationCheckAndMail()
+        print("Waiting for", periodMin, "minutes ...")
+        time.sleep(periodSec)
+
+
+
+config.get()
+config.get_state()
+
+DonationCheckLoop()
+
+
+
+
 # test1
 #btc_address = '19M3CezEbdiv9EZKryi89is5KcM3QzStkL'  # test1 1521148506 1520130638 1514346984
 #paymentRes = btc_checker.BTCCheck(btc_address, time0, cur_time)
@@ -50,16 +72,3 @@ def DonationCheck():
 # test2
 #btc_address = '39du52dRqNHCcErFuoFCqhHQs2fczQUqBL'
 #CheckAddress(btc_address, time0, cur_time, cur_block_height)
-
-
-config.get()
-config.get_state()
-
-paymentRes = DonationCheck()
-
-paymentRes.print()
-if (paymentRes.count() > 0):
-    mailer.send_payments(paymentRes)
-else:
-    print("No new payments to send")
-
