@@ -15,4 +15,7 @@ Mar 21:
 - SMTP mail sending
 - config and state files
 - Checking in a loop
+Mar 21:
+- End-to-end test with real addresses, real BTC transfer, real mail
+  on 2018-03-22 07:03:38, from 3HcQEUUKSMyWCD4j6gNEhqUxNKF2DV8cFP, txId a0f81e4495c6a0e197dce65e33a08965e7df94e6526b0e2de6f6648918c2f460
 

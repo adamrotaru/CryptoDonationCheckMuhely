@@ -1,0 +1,13 @@
+Config read from config.json
+State read from state.json
+Checking payments, time range 2018-03-22 06:14:39 2018-03-22 07:14:56
+Checking BTC 12QpKTP3KnHg7ZqEAEyJTq6pGX7xjWTvGG time range 1521695679 1521699296 514630
+Found 1 payments
+Checking ETH 0x0197F32CdccE55A8c34a2c000AdD1adFdAf97f14 time range 1521695679 1521699296
+State written to state.json
+
+There is one new payment:
+- 0.0005 BTC, on 2018-03-22 07:03:38, from 3HcQEUUKSMyWCD4j6gNEhqUxNKF2DV8cFP (0 confirmations)
+Check included period: 2018-03-22 06:14:39 - 2018-03-22 07:14:56
+mail sent to adam_rotaru@yahoo.com payments: 1
+Waiting for 5.0 minutes ...

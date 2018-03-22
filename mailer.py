@@ -3,6 +3,7 @@ import config
 import requests
 import smtplib
 from email.mime.text import MIMEText
+import datetime
 
 #mailgun_domain = "sandbox71d6b0cfbdc24509a7e8ec91c3fdcb03.mailgun.org"
 #mailgun_apikey = ""
@@ -20,7 +21,7 @@ def send_payments(paymentRes):
             body = "There are " + str(paymentRes.count())+ " new payments:" + "\n"
     for p in paymentRes.payments:
         body = body + "- " + p.to_string() + "\n"
-    body = body + "\n" + "Check included period: " + datetime.datetime.fromtimestamp(self.time_from).__str__() + " - " + datetime.datetime.fromtimestamp(self.time_to).__str__() + " (UTC)." + "\n"
+    body = body + "\n" + "Check included period: " + datetime.datetime.fromtimestamp(paymentRes.time_from).__str__() + " - " + datetime.datetime.fromtimestamp(paymentRes.time_to).__str__() + " (UTC)." + "\n"
     body = body + "\n" + "Happy blockchain hacking!" + "\n"
 
     cfg = config.get()

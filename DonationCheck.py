@@ -32,7 +32,7 @@ def DonationCheckAndMail():
     state = config.get_state()
     lastcheck = int(state["lastcheck"])
     # current UTC time
-    cur_time = int(time.time()) + time.timezone
+    cur_time = int(time.time()) # + time.timezone
     paymentRes = DonationCheckTime(lastcheck, cur_time)
     try:
         state["lastcheck"] = cur_time

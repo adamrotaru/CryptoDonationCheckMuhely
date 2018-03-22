@@ -20,7 +20,7 @@ class PaymentResult:
                 print("There are", len(self.payments), "new payments:")
         for p in self.payments:
             print("-", p.to_string())
-        print("Check included period:", datetime.datetime.fromtimestamp(self.time_from).__str__(), "-", datetime.datetime.fromtimestamp(self.time_to).__str__())
+        print("Check included period:", datetime.datetime.fromtimestamp(self.time_from).__str__(), "-", datetime.datetime.fromtimestamp(self.time_to).__str__() + " UTC")
 
     def count(self):
         return len(self.payments)

@@ -25,6 +25,7 @@ def BTCCheck(address, time_from, time_to):
     #print("final balance:", data['final_balance'])
     spent_sum = 0
     recd_sum = 0
+    #print(len(data['txs']))
     for tx in data['txs']:   #reversed(data['txs']):
         p = __checkTransaction(tx, address, time_from, time_to, cur_block_height)
         if p is not None:
@@ -35,9 +36,11 @@ def BTCCheck(address, time_from, time_to):
 
 def __checkTransaction(tx, address, time_from, time_to, cur_block_height):
     #print(tx)
-    block = tx['block_height']
-    #print('block_height:', block)
-    no_confirm = cur_block_height - block + 1
+    no_confirm = 0
+    if 'block_height' in tx:
+        block = tx['block_height']
+        #print('block_height:', block)
+        no_confirm = cur_block_height - block + 1
     time = tx['time']
     #print('time:', time)
     if time <= time_from:
