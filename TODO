@@ -1,3 +1,4 @@
+- Overlap check period to include transactions again with larger confirmations
 - LTC support
 - DASH support
 - Improve error handling
