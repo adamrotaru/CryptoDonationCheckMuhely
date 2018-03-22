@@ -1,2 +1,18 @@
 - LTC support
 - DASH support
+- Improve error handling
+
+
+
+LOG
+Mar 19:
+- started
+- BTC checker using blockchain.info
+- ETH checker using etherscan.io
+Mar 20:
+- Mail sending, using Mailgun API
+Mar 21:
+- SMTP mail sending
+- config and state files
+- Checking in a loop
+

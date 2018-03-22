@@ -20,7 +20,8 @@ def send_payments(paymentRes):
             body = "There are " + str(paymentRes.count())+ " new payments:" + "\n"
     for p in paymentRes.payments:
         body = body + "- " + p.to_string() + "\n"
-    body = body + "\n" + "Check included period: " + datetime.datetime.fromtimestamp(self.time_from).__str__() + " - " + datetime.datetime.fromtimestamp(self.time_to).__str__() +  + "\n"
+    body = body + "\n" + "Check included period: " + datetime.datetime.fromtimestamp(self.time_from).__str__() + " - " + datetime.datetime.fromtimestamp(self.time_to).__str__() + " (UTC)." + "\n"
+    body = body + "\n" + "Happy blockchain hacking!" + "\n"
 
     cfg = config.get()
     to_addr = cfg["to_addr"]
