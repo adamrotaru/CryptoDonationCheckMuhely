@@ -6,6 +6,7 @@
     "to_addr": "ENTER_DESTINATION_EMAIL_HERE",
     "from_addr": "DonationCheck@blokklancmuhely.club",
 
+    "btc_min_confirmations": 3,
     "etherscan_apiKeyToken": "C5I42D9TYVZZGVQZKY6KU8TEUBY912STGF",
     "smtp_server": "smtp.mailgun.org",
     "smtp_port": 587,

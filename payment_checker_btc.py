@@ -1,13 +1,12 @@
-import payment
-import payment_result
+import payment_checker_result
 
 import requests
 import json
 import datetime
 
 # Checks incoming BTC transactions to a given address, within a time range
-# Returns an array of Payments
-def BTCCheck(address, time_from, time_to):
+# Returns a PaymentResult
+def BTCCheck(address, time_from, time_to, min_confirmations = 3):
     cur_block_height = __getBlockHeight()
     print("Checking BTC", address, "time range", time_from, time_to.__str__(), cur_block_height)
     url = 'https://blockchain.info/en/rawaddr/' + address
@@ -17,22 +16,27 @@ def BTCCheck(address, time_from, time_to):
     payments = []
     if response.status_code != 200:
         print("Error", response.status_code, "cont", response.content)
-        return payments
+        return payment_checker_result.PaymentResult('BTC', time_from, time_to)
     #print(response.content)
     #data = json.load(response.content)
     data = response.json()
     #print data
     #print("final balance:", data['final_balance'])
-    spent_sum = 0
-    recd_sum = 0
     #print(len(data['txs']))
     for tx in data['txs']:   #reversed(data['txs']):
         p = __checkTransaction(tx, address, time_from, time_to, cur_block_height)
         if p is not None:
             payments.append(p)
-    if len(payments) > 0:
-        print("Found", len(payments), "payments")
-    return payments
+    # compute sums
+    sum_confd = 0
+    sum_nonconfd = 0
+    for p in payments:
+        sum_nonconfd = sum_nonconfd + p.amount
+        if (p.no_confirm >= min_confirmations):
+            sum_confd = sum_confd + p.amount
+    res = payment_checker_result.PaymentResult('BTC', time_from, time_to, sum_confd, sum_nonconfd, payments)
+    res.print()
+    return res
 
 def __checkTransaction(tx, address, time_from, time_to, cur_block_height):
     #print(tx)
@@ -77,7 +81,7 @@ def __checkTransaction(tx, address, time_from, time_to, cur_block_height):
             #print('recd value:', value, 'recd total', recd_sum)
     #print('result:', tx['result'], 'spent total', spent_sum, 'recd total', recd_sum)
     if is_in_out:
-        return payment.Payment(out_amount/100000000, 'BTC', time, address, from_addr, no_confirm)
+        return payment_checker_result.PaymentInfo(out_amount/100000000, time, address, from_addr, no_confirm)
     return None
     
 def __getBlockHeight():

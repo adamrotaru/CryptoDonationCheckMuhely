@@ -1,11 +1,12 @@
-import payment
-import payment_result
+import payment_checker_result
 import config
 
 import requests
 import datetime
 
-def ETHCheck(address, time_from, time_to):
+# Checks incoming ETH transactions to a given address, within a time range
+# Returns a PaymentResult
+def ETHCheck(address, time_from, time_to, min_confirmations = 3):
     print("Checking ETH", address, "time range", time_from, time_to)
     apiKeyToken = config.get()["etherscan_apiKeyToken"]
     # address balance
@@ -26,15 +27,22 @@ def ETHCheck(address, time_from, time_to):
         print(data)
         #print(data['status'])
         #print(data['message'])
-        return payments
+        return payment_checker_result.PaymentResult('ETH', time_from, time_to)
     #print(data['result'])
     for tx in data['result']:
         p = __checkTransaction(tx, address, time_from, time_to)
         if p is not None:
             payments.append(p)
-    if len(payments) > 0:
-        print("Found", len(payments), "payments")
-    return payments
+    # compute sums
+    sum_confd = 0
+    sum_nonconfd = 0
+    for p in payments:
+        sum_nonconfd = sum_nonconfd + p.amount
+        if (p.no_confirm >= min_confirmations):
+            sum_confd = sum_confd + p.amount
+    res = payment_checker_result.PaymentResult('ETH', time_from, time_to, sum_confd, sum_nonconfd, payments)
+    res.print()
+    return res
 
 def __checkTransaction(tx, address, time_from, time_to):
     #print(tx)
@@ -57,6 +65,6 @@ def __checkTransaction(tx, address, time_from, time_to):
         confirmations = tx['confirmations']
         #print('confirmations', confirmations)
         #print(tx)
-        p = payment.Payment(value, 'ETH', time, address, from_addr, confirmations)
+        p = payment_checker_result.PaymentInfo(value, time, address, from_addr, confirmations)
         return p
     return None
