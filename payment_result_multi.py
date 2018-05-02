@@ -12,15 +12,15 @@ class PaymentResultMulti:
 
     def print(self):
         if len(self.payments) == 0:
-            print("There are no new payments :(")
+            print("There are no new payments :(", end="")
         else:
             if len(self.payments) == 1:
-                print("There is one new payment:")
+                print("There is one new payment.", end="")
             else:
-                print("There are", len(self.payments), "new payments:")
+                print("There are", len(self.payments), "new payments.", end="")
+        print("  period:", datetime.datetime.fromtimestamp(self.time_from).__str__(), "-", datetime.datetime.fromtimestamp(self.time_to).__str__() + " UTC")
         for p in self.payments:
             print("-", p.to_string())
-        print("Check included period:", datetime.datetime.fromtimestamp(self.time_from).__str__(), "-", datetime.datetime.fromtimestamp(self.time_to).__str__() + " UTC")
 
     def count(self):
         return len(self.payments)

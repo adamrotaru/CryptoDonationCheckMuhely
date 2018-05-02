@@ -12,7 +12,7 @@ import datetime
 
 
 def DonationCheckTime(time_from, time_to):
-    print("Checking payments, time range", datetime.datetime.fromtimestamp(time_from).__str__(), datetime.datetime.fromtimestamp(time_to).__str__())
+    print("Checking payments, time range", datetime.datetime.fromtimestamp(time_from).__str__(), "-", datetime.datetime.fromtimestamp(time_to).__str__(), " UTC")
     res = payment_result_multi.PaymentResultMulti(time_from, time_to, [])
     btc_address = config.get()["btc_address"]
     if len(btc_address) > 0:
